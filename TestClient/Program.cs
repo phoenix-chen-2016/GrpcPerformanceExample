@@ -13,7 +13,12 @@ namespace TestClient
 		static async Task Main(string[] args)
 		{
 			var channel = GrpcChannel.ForAddress(
-				"https://localhost:5001/");
+				"https://localhost:5001/",
+				new GrpcChannelOptions
+				{
+					HttpClient = new HttpClient(new TurnAroundSocketsHttpHandler()),
+					DisposeHttpClient = true
+				});
 			var client = new Greeter.GreeterClient(channel);
 
 			var sw = new Stopwatch();
