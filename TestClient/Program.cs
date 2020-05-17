@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
 using GrpcPerformanceExample;
@@ -11,7 +12,8 @@ namespace TestClient
 	{
 		static async Task Main(string[] args)
 		{
-			var channel = GrpcChannel.ForAddress("https://localhost:5001/");
+			var channel = GrpcChannel.ForAddress(
+				"https://localhost:5001/");
 			var client = new Greeter.GreeterClient(channel);
 
 			var sw = new Stopwatch();

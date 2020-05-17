@@ -15,12 +15,13 @@ namespace GrpcPerformanceExample
 			_logger = logger;
 		}
 
-		public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+		public override async Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
 		{
-			return Task.FromResult(new HelloReply
+			await Task.Delay(200).ConfigureAwait(false);
+			return new HelloReply
 			{
 				Message = "Hello " + request.Name
-			});
+			};
 		}
 	}
 }
