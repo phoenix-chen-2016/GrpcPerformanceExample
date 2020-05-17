@@ -16,7 +16,10 @@ namespace TestClient
 				"https://localhost:5001/",
 				new GrpcChannelOptions
 				{
-					HttpClient = new HttpClient(new TurnAroundSocketsHttpHandler()),
+					HttpClient = new HttpClient(new TurnAroundSocketsHttpHandler()
+					{
+						Connections = 100
+					}),
 					DisposeHttpClient = true
 				});
 			var client = new Greeter.GreeterClient(channel);
